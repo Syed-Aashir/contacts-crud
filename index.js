@@ -1,47 +1,53 @@
-
-
 const addForm = document.querySelector('#add-contact-form');
-// console.log(addForm);
 const addFormInputs = document.querySelectorAll('#add-contact-form input');
-// console.log(addFormInputs);
-const contactsList = document.querySelector('#contacts-list')
-
+const contactsRenderList = document.querySelector('#contacts-list');
 
 var formInputs = {
-    firstName : '',
-    lastName : '',
-    phoneNumber : '',
-    emailAddress : ''
+  firstName: '',
+  lastName: '',
+  phoneNumber: null,
+  emailAddress: '',
+};
+let contactList = [];
+
+window.addEventListener('load', () => {
+  const allContacts = JSON.parse(localStorage.getItem('allContacts'));
+  if (allContacts) {
+    contactList = allContacts.map((contact) => ({
+      ...contact,
+      phoneNumber: parseInt(contact.phoneNumber),
+    }));
+  }
+  renderList(contactList);
+});
+
+addFormInputs.forEach((input) => {
+  input.addEventListener('input', (e) => {
+    const currentInput = e.target.name;
+    formInputs[currentInput] = e.target.value;
+  });
+});
+
+addForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  contactList = [...contactList, { ...formInputs, id: contactList.length }];
+  renderList(contactList);
+  localStorage.setItem('allContacts', JSON.stringify(contactList));
+  addForm.reset();
+});
+
+function renderList(list = []) {
+  contactsRenderList.innerHTML = ' ';
+  list.forEach((contact) => {
+    contactsRenderList.insertAdjacentHTML(
+      'afterbegin',
+      `<h3 id= ${contact.id}>${contact.firstName} - ${contact.lastName}</h3>`
+    );
+  });
 }
 
-
-let contactList = []
-
-addFormInputs.forEach((input, index) => {
-    // console.log(input)
-    input.addEventListener('input', (e) =>{
-        // console.log(e.target.name, e.target.value)
-        const currentInput = e.target.name;
-        formInputs[currentInput] = e.target.value;
-    })
-})
-
-addForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    // console.log(formInputs)
-    contactList = [...contactList, {...formInputs, id : contactList.length}]
-    renderList(contactList)
-})
-
-function renderList(list=[]){
-    contactList.innerHTML = ' ';
-    list.forEach((contact) =>{
-        contactsList.insertAdjacentHTML('afterbegin', `<h3 id= ${contact.id}>${contact.firstName} - ${contact.lastName}</h3>`)
-    })
-}
-
-contactsList.addEventListener('click', (e) =>{
-    console.log(e.target.id)
-    let contactID = e.target.id;
-    window.location.href = `addContact.html?contact=${contactID}`
-})
+contactsRenderList.addEventListener('click', (e) => {
+  let contactID = e.target.id;
+  localStorage.setItem('allContacts', JSON.stringify(contactList));
+  window.location.href = `contact.html?contact=${contactID}`;
+});
