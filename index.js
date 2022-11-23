@@ -1,6 +1,7 @@
 const addForm = document.querySelector('#add-contact-form');
 const addFormInputs = document.querySelectorAll('#add-contact-form input');
 const contactsRenderList = document.querySelector('#contacts-list');
+const searchInput = document.querySelector('#search-contact');
 
 var formInputs = {
   firstName: '',
@@ -45,6 +46,17 @@ function renderList(list = []) {
     );
   });
 }
+
+// search Contact
+searchInput.addEventListener('keyup', (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  const filteredContacts = contactList.filter((contact) => {
+    const firstName = contact.firstName?.toLowerCase();
+    const lastName = contact.lastName?.toLowerCase();
+    return firstName?.includes(searchValue) || lastName?.includes(searchValue);
+  });
+  renderList(filteredContacts);
+});
 
 contactsRenderList.addEventListener('click', (e) => {
   let contactID = e.target.id;

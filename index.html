@@ -7,16 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-        <form action="" id="add-contact-form">
-                <input type="text" name="firstName" id="fname" placeholder="First Name">
-                <input type="text" name="lastName" id="lname" placeholder="Last Name">
-                <input type="number" name="phoneNumber" id="phone" placeholder="Phone Number">
-                <input type="email" name="emailAddress" id="email" placeholder="Email">
-                <br>
-                <button type="submit">Add Contact</button>
-            </form>
+    <form action="" id="add-contact-form">
+        <input type="text" name="firstName" id="fname" placeholder="First Name">
+        <input type="text" name="lastName" id="lname" placeholder="Last Name">
+        <input type="number" name="phoneNumber" id="phone" placeholder="Phone Number">
+        <input type="email" name="emailAddress" id="email" placeholder="Email">
+        <br>
+        <button type="submit">Add Contact</button>
+    </form>
 
     <h1>Contacts</h1>
+    <div class="filters-wrapper">
+        <input type="text" name="searchContact" id="search-contact" placeholder="Search by name">
+    </div>
     <div id="contacts-list"></div>
 
     <script src="index.js"></script>
