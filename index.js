@@ -2,6 +2,8 @@ const addForm = document.querySelector('#add-contact-form');
 const addFormInputs = document.querySelectorAll('#add-contact-form input');
 const contactsRenderList = document.querySelector('#contacts-list');
 const searchInput = document.querySelector('#search-contact');
+const orderSelectInput = document.querySelector('#order-select');
+const filterSelectInput = document.querySelector('#filter-select');
 
 var formInputs = {
   firstName: '',
@@ -9,7 +11,7 @@ var formInputs = {
   phoneNumber: null,
   emailAddress: '',
 };
-let contactList = [];
+var contactList = [];
 
 window.addEventListener('load', () => {
   const allContacts = JSON.parse(localStorage.getItem('allContacts'));
@@ -54,6 +56,37 @@ searchInput.addEventListener('keyup', (e) => {
     const firstName = contact.firstName?.toLowerCase();
     const lastName = contact.lastName?.toLowerCase();
     return firstName?.includes(searchValue) || lastName?.includes(searchValue);
+  });
+  renderList(filteredContacts);
+});
+
+// order Contacts
+orderSelectInput.addEventListener('change', (e) => {
+  const orderBy = Number(e.target.value);
+  if (!orderBy) return;
+  const sorted = contactList.sort(function (a, b) {
+    if (a.firstName < b.firstName) {
+      return orderBy;
+    } else if (a.firstName > b.firstName) {
+      return -1 * orderBy;
+    }
+    return 0;
+  });
+  renderList(sorted);
+});
+
+// filter Contacts
+filterSelectInput.addEventListener('change', (e) => {
+  const attributeName = e.target.value;
+  if (!attributeName) return;
+  const filteredContacts = contactList.filter((contact) => {
+    const value = contact[attributeName];
+    return (
+      value !== null &&
+      value !== '' &&
+      !Number.isNaN(value) &&
+      value !== undefined
+    );
   });
   renderList(filteredContacts);
 });
