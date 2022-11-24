@@ -44,7 +44,7 @@ function renderList(list = []) {
   list.forEach((contact) => {
     contactsRenderList.insertAdjacentHTML(
       'afterbegin',
-      `<h3 id= ${contact.id}>${contact.firstName} - ${contact.lastName}</h3>`
+      `<h3 id= ${contact.id}>${contact.firstName} ${contact.lastName}</h3>`
     );
   });
 }
