@@ -1,0 +1,7 @@
+#pagination-wrapper{
+    display: none;
+}
+
+.show{
+    display: block !important;
+}

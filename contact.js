@@ -37,16 +37,15 @@ detailsFormInputs.forEach((input, index) => {
 
 // update contact
 contactEditButton.addEventListener('click', (e) => {
-  e.preventDefault();
   allContacts = allContacts.map((contact) =>
     contact.id === contactId ? { ...selectedContact } : contact
   );
   localStorage.setItem('allContacts', JSON.stringify(allContacts));
+  window.location.href = `index.html`;
 });
 
 // delete contact
 contactDeleteButton.addEventListener('click', (e) => {
-  e.preventDefault();
   allContacts = allContacts.filter((contact) => contact.id !== contactId);
   localStorage.setItem('allContacts', JSON.stringify(allContacts));
   window.location.href = `index.html`;
