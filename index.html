@@ -12,66 +12,67 @@
   <body>
     <div class="container flex">
         <div class="container-wrap">
-        <div class="add-form">
-            <h2>Add Contact</h2>
-            <form action="" id="add-contact-form">
+            <div class="add-form">
+                <h2>Add Contact</h2>
+                <form action="" id="add-contact-form">
+                    <input
+                    type="text"
+                    name="firstName"
+                    id="fname"
+                    placeholder="First Name"
+                    />
+                    <input type="text" name="lastName" id="lname" placeholder="Last Name" />
+                    <input
+                    type="number"
+                    name="phoneNumber"
+                    id="phone"
+                    placeholder="Phone Number"
+                    />
+                    <input
+                    type="email"
+                    name="emailAddress"
+                    id="email"
+                    placeholder="Email"
+                    />
+                    <br />
+                    <button type="submit" class="form-btn">Add Contact</button>
+                </form>
+            </div>
+      
+            <div class="filters-wrapper">
+                <h2>Contacts</h2>
                 <input
                 type="text"
-                name="firstName"
-                id="fname"
-                placeholder="First Name"
+                name="searchContact"
+                id="search-contact"
+                placeholder="Search by name"
                 />
-                <input type="text" name="lastName" id="lname" placeholder="Last Name" />
-                <input
-                type="number"
-                name="phoneNumber"
-                id="phone"
-                placeholder="Phone Number"
-                />
-                <input
-                type="email"
-                name="emailAddress"
-                id="email"
-                placeholder="Email"
-                />
-                <br />
-                <button type="submit" class="form-btn">Add Contact</button>
-            </form>
-      </div>
-      
-      <div class="filters-wrapper">
-        <h2>Contacts</h2>
-        <input
-          type="text"
-          name="searchContact"
-          id="search-contact"
-          placeholder="Search by name"
-        />
-        <div class="filter-container">
-            <div class="order-wrapper">
-            <!-- <label>Order by:</label> -->
-            <select id="order-select">
-                <option value="">Order By</option>
-                <option value="1">Alphabetical order</option>
-                <option value="-1">Reverse Order</option>
-            </select>
+                <div class="filter-container">
+                    <div class="order-wrapper">
+                    <!-- <label>Order by:</label> -->
+                    <select id="order-select">
+                        <option value="">Order By</option>
+                        <option value="1">Alphabetical order</option>
+                        <option value="-1">Reverse Order</option>
+                    </select>
+                    </div>
+                    <div class="filter-wrapper">
+                    <!-- <label>Filter by:</label> -->
+                    <select id="filter-select">
+                        <option value="">Fiter By</option>
+                        <option value="phoneNumber">Contacts with phone Numbers</option>
+                        <option value="emailAddress">Contacts having Email Id</option>
+                    </select>
+                    </div>
+                </div>
             </div>
-            <div class="filter-wrapper">
-            <!-- <label>Filter by:</label> -->
-            <select id="filter-select">
-                <option value="">Fiter By</option>
-                <option value="phoneNumber">Contacts with phone Numbers</option>
-                <option value="emailAddress">Contacts having Email Id</option>
-            </select>
-            </div>
-        </div>
-      </div>
-      <div id="contacts-list">
-      </div>
-        </div>
-    </div>
 
-    <div id="pagination-wrapper">
+            <div id="contacts-list">
+            </div>
+
+            <div id="pagination-wrapper">
+            </div>
+        </div>
     </div>
 
     <script src="index.js"></script>
