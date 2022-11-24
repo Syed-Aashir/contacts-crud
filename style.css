@@ -155,3 +155,12 @@ form.contactDetailsForm input:focus{
 .contact-edit-field label {
     margin-bottom: 10px;
 }
+
+/* pagination */
+#pagination-wrapper{
+    display: none;
+}
+
+.show{
+    display: block !important;
+}
