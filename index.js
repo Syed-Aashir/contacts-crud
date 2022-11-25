@@ -85,9 +85,9 @@ orderSelectInput.addEventListener('change', (e) => {
   if (!orderBy) return;
   const sorted = contactList.sort(function (a, b) {
     if (a.firstName < b.firstName) {
-      return orderBy;
+      return orderBy * -1;
     } else if (a.firstName > b.firstName) {
-      return -1 * orderBy;
+      return orderBy;
     }
     return 0;
   });
