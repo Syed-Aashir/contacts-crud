@@ -97,7 +97,10 @@ orderSelectInput.addEventListener('change', (e) => {
 // filter Contacts
 filterSelectInput.addEventListener('change', (e) => {
   const attributeName = e.target.value;
-  if (!attributeName) return;
+  if (!attributeName) {
+    renderList(contactList);
+    return;
+  }
   const filteredContacts = contactList.filter((contact) => {
     const value = contact[attributeName];
     return (
