@@ -35,7 +35,7 @@ function renderList(list = []) {
   list.forEach((contact) => {
     contactsRenderList.insertAdjacentHTML(
       'beforeend',
-      `<h3 id='contactItem-${contact.id}'>${contact.firstName} - ${contact.lastName}</h3>`
+      `<ul><li id='contactItem-${contact.id}'>${contact.firstName} - ${contact.lastName}</li></ul>`
     );
   });
 }
@@ -44,9 +44,9 @@ function renderList(list = []) {
 searchInput.addEventListener('keyup', (e) => {
   const searchValue = e.target.value.toLowerCase();
   const filteredContacts = contactList.filter((contact) => {
-    const firstName = contact.firstName?.toLowerCase();
-    const lastName = contact.lastName?.toLowerCase();
-    return firstName?.includes(searchValue) || lastName?.includes(searchValue);
+    const firstName = contact.firstName.toLowerCase();
+    const lastName = contact.lastName.toLowerCase();
+    return firstName.includes(searchValue) || lastName.includes(searchValue);
   });
   renderList(filteredContacts);
 });
