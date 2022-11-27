@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container flex">
+        <div class="container-wrap">
+            <div class="add-form">
+                <h2>Add Contact</h2>
+                <form action="" id="add-contact-form">
+                    <input
+                    type="text"
+                    name="firstName"
+                    id="fname"
+                    placeholder="First Name"
+                    />
+                    <input type="text" name="lastName" id="lname" placeholder="Last Name" />
+                    <input
+                    type="tel"
+                    name="phoneNumber"
+                    id="phone"
+                    placeholder="Phone Number (optional)"
+                    />
+                    <input
+                    type="email"
+                    name="emailAddress"
+                    id="email"
+                    placeholder="Email (optional)"
+                    />
+                    <br />
+                    <button type="submit" class="form-btn">Add Contact</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="newContact.js"></script>
+</body>
+</html>

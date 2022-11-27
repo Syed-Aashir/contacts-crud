@@ -2,18 +2,12 @@
 const params = new URL(window.location.href).searchParams;
 const contactId = parseInt(params.get('contact'));
 
-const contactDetailsForm = document.querySelector('.contactDetailsForm');
-const detailsFormInputs = document.querySelectorAll(
-  '.contactDetailsForm input'
-);
-const contactEditButton = document.querySelector('#contact-edit-btn');
-const contactDeleteButton = document.querySelector('#delete-contact-btn');
+const contactWraper = document.querySelector('#contact-details-wrapper');
+const editContactButton = document.querySelector('#edit-contact-button');
 
 var selectedContact = null;
-var allContacts = [];
-// get contact data from local storage
 window.addEventListener('load', () => {
-  allContacts = JSON.parse(localStorage.getItem('allContacts'));
+  const allContacts = JSON.parse(localStorage.getItem('allContacts'));
   selectedContact = allContacts.find((contact) => contact.id === contactId);
   renderContactDetails(selectedContact);
 });
@@ -21,32 +15,15 @@ window.addEventListener('load', () => {
 // render initial values of contact
 const renderContactDetails = (contactData) => {
   if (!contactData) return;
-  detailsFormInputs.forEach((contactDetail, index) => {
-    const detailName = contactDetail.getAttribute('name');
-    contactDetail.setAttribute('value', contactData[detailName]);
+  Object.entries(contactData).forEach(([key, value]) => {
+    if (key === 'id') return;
+    contactWraper.insertAdjacentHTML(
+      'beforeend',
+      `<p class='contact-${key}'>${value}</p>`
+    );
   });
 };
 
-// listen to input change
-detailsFormInputs.forEach((input, index) => {
-  input.addEventListener('input', (e) => {
-    const currentInput = e.target.name;
-    selectedContact[currentInput] = e.target.value;
-  });
-});
-
-// update contact
-contactEditButton.addEventListener('click', (e) => {
-  allContacts = allContacts.map((contact) =>
-    contact.id === contactId ? { ...selectedContact } : contact
-  );
-  localStorage.setItem('allContacts', JSON.stringify(allContacts));
-  window.location.href = `index.html`;
-});
-
-// delete contact
-contactDeleteButton.addEventListener('click', (e) => {
-  allContacts = allContacts.filter((contact) => contact.id !== contactId);
-  localStorage.setItem('allContacts', JSON.stringify(allContacts));
-  window.location.href = `index.html`;
+editContactButton.addEventListener('click', () => {
+  window.location.href = `editContact.html?contact=${contactId}`;
 });

@@ -1,5 +1,3 @@
-const addForm = document.querySelector('#add-contact-form');
-const addFormInputs = document.querySelectorAll('#add-contact-form input');
 const contactsRenderList = document.querySelector('#contacts-list');
 const searchInput = document.querySelector('#search-contact');
 const orderSelectInput = document.querySelector('#order-select');
@@ -7,13 +5,6 @@ const filterSelectInput = document.querySelector('#filter-select');
 const paginationWrapper = document.querySelector('#pagination-wrapper');
 
 var paginationButtons = [];
-
-var formInputs = {
-  firstName: '',
-  lastName: '',
-  phoneNumber: null,
-  emailAddress: '',
-};
 var allContacts = [];
 var contactList = [];
 var totalContacts = 0;
@@ -28,34 +19,15 @@ window.addEventListener('load', () => {
       phoneNumber: parseInt(contact.phoneNumber),
     }));
     totalContacts = allContacts.length;
-    contactList = allContacts.slice(currentPage, pageSize);
+
     if (totalContacts > 5) {
+      contactList = allContacts.slice(currentPage, pageSize);
       showPagination();
+    } else {
+      contactList = [...allContacts];
     }
   }
   renderList(contactList);
-});
-
-addFormInputs.forEach((input) => {
-  input.addEventListener('input', (e) => {
-    const currentInput = e.target.name;
-    formInputs[currentInput] = e.target.value;
-  });
-});
-
-addForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  allContacts = [...allContacts, { ...formInputs, id: totalContacts + 1 }];
-  localStorage.setItem('allContacts', JSON.stringify(allContacts));
-  totalContacts = totalContacts + 1;
-  if (totalContacts > 5) {
-    contactList = allContacts.slice(0, pageSize);
-    showPagination();
-  } else {
-    contactList = [...allContacts];
-  }
-  renderList(contactList);
-  addForm.reset();
 });
 
 function renderList(list = []) {
@@ -137,6 +109,7 @@ function handlePageChange(e) {
   const start = (page - 1) * pageSize;
   const end = page * pageSize;
   const paginatedContacts = allContacts.slice(start, end);
+  contactList = [...paginatedContacts];
   renderList(paginatedContacts);
 }
 
